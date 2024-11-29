@@ -52,12 +52,6 @@ Xampp, servidor web local multiplataforma que contiene los intérpretes para los
 2. Descargarlo e instalarlo.
 3. Inicia los servicios de Apache desde el panel de control de XAMPP.
 
-<p align="center">
-  <img src="images/panel-control.png" alt="Formulario" />
-</p>
-
-
-
 
 ### Clonar el proyecto
 ```sh

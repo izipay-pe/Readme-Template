@@ -161,6 +161,9 @@ function formToken(){
 ```
 
 
+## Pasos 2: Analizar resultado del pago
+
+#### Etapa 4: Validación de firma
 ```php
 function checkHash(){
     if ($_POST['kr-hash-key'] == "sha256_hmac") {
@@ -178,10 +181,6 @@ function checkHash(){
 }
 ```
 
-#### Etapa 2: Crear formtoken
-Se realizará una solicitud POST a nuestra api
-
-## Pasos 2: Analizar resultado del pago
 #### Etapa 6: IPN
 La IPN es una notificación de servidor a servidor (servidor de Izipay hacia el servidor del comercio) que facilita información en tiempo real y de manera automática cuando se produce un evento, por ejemplo, al registrar una transacción.
 Los datos transmitidos en la IPN se reciben y analizan mediante un script que el vendedor habrá desarrollado en su servidor.

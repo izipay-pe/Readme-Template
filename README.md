@@ -37,8 +37,8 @@ Este manual está diseñado para ayudarte a comprender el flujo de la integraci�
 - Comprender el flujo de comunicación de la pasarela. [Información Aquí](https://secure.micuentaweb.pe/doc/es-PE/rest/V4.0/javascript/guide/start.html)
 - Extraer credenciales del Back Office Vendedor. [Guía Aquí](https://github.com/izipay-pe/obtener-credenciales-de-conexion)
 - Para este proyecto utilizamos la herramienta Visual Studio Code.
-> [!NOTE]
-> Tener en cuenta que, para que el desarrollo de tu proyecto, eres libre de emplear tus herramientas preferidas.
+  > [!NOTE]
+  > Tener en cuenta que, para que el desarrollo de tu proyecto, eres libre de emplear tus herramientas preferidas.
 
 
 * Servidor Web
@@ -255,6 +255,10 @@ Puede intentar realizar una transacción utilizando una tarjeta de prueba con la
 ## 5. Personalización
 
 Si deseas aplicar cambios específicos en la apariencia de la pasarela de pago, puedes lograrlo mediante la modificación de código CSS. En este enlace [Código CSS - Incrustado](https://github.com/izipay-pe/Personalizacion/blob/main/Formulario%20Incrustado/Style-Personalization-Incrustado.css) podrá encontrar nuestro script para un formulario incrustado.
+
+<p align="center">
+  <img src="https://i.postimg.cc/zDddmKpH/persona.png" alt="Formulario"/>
+</p>
 
 ## 6. Consideraciones
 

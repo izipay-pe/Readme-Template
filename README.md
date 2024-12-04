@@ -16,7 +16,7 @@
 🎨 [5. Personalización](#7-personalización)  
 📚 [6. Consideraciones](#8-consideraciones)
 
-## 1. Introducción
+## ➡️ 1. Introducción
 
 En este manual podrás encontrar una guía paso a paso para configurar un proyecto de **[PHP]** con la pasarela de pagos de IZIPAY. Te proporcionaremos instrucciones detalladas y credenciales de prueba para la instalación y configuración del proyecto, permitiéndote trabajar y experimentar de manera segura en tu propio entorno local.
 Este manual está diseñado para ayudarte a comprender el flujo de la integración de la pasarela para ayudarte a aprovechar al máximo tu proyecto y facilitar tu experiencia de desarrollo.
@@ -28,11 +28,7 @@ Este manual está diseñado para ayudarte a comprender el flujo de la integraci�
   <img src="https://github.com/izipay-pe/Imagenes/blob/main/formulario_incrustado/Imagen-Formulario-Incrustado.png" alt="Formulario" width="350"/>
 </p>
 
-#### Este ejemplo es solo una guía para poder realizar la integración de la pasarela de pagos, puede realizar las modificaciones necesarias para su proyecto.
-
-<a name="Requisitos_Previos"></a>
-
-## 2. Requisitos Previos
+## 🔑 2. Requisitos Previos
 
 - Comprender el flujo de comunicación de la pasarela. [Información Aquí](https://secure.micuentaweb.pe/doc/es-PE/rest/V4.0/javascript/guide/start.html)
 - Extraer credenciales del Back Office Vendedor. [Guía Aquí](https://github.com/izipay-pe/obtener-credenciales-de-conexion)
@@ -42,7 +38,7 @@ Este manual está diseñado para ayudarte a comprender el flujo de la integraci�
 > [!NOTE]
 > Tener en cuenta que, para que el desarrollo de tu proyecto, eres libre de emplear tus herramientas preferidas.
 
-## 3. Ejecutar ejemplo
+## 🚀 3. Ejecutar ejemplo
 
 ### Instalar Xampp u otro servidor local compatible con php
 
@@ -63,22 +59,19 @@ git clone https://github.com/izipay-pe/Embedded-PaymentForm-Php.git
 **Nota**: Reemplace **[CHANGE_ME]** con sus credenciales de `API REST` extraídas desde el Back Office Vendedor, ver [Requisitos Previos](#Requisitos_Previos).
 
 - Editar en `keys.example.php` en la ruta raiz del proyecto:
+```php
+// Identificador de su tienda
+define("USERNAME", "~ CHANGE_ME_USER_ID ~");
 
-    ```sh
-    // Identificador de su tienda
-    IzipayController::setDefaultUsername("~ CHANGE_ME_USER_ID ~");
+// Clave de Test o Producción
+define("PASSWORD", "~ CHANGE_ME_PASSWORD ~");
 
-    // Clave de Test o Producción
-    IzipayController::setDefaultPassword("~ CHANGE_ME_PASSWORD ~");
+// Clave Pública de Test o Producción
+define("PUBLIC_KEY","~ CHANGE_ME_PUBLIC_KEY ~");
 
-    // Clave Pública de Test o Producción
-    IzipayController::setDefaultPublicKey("~ CHANGE_ME_PUBLIC_KEY ~");
-
-    // Clave HMAC-SHA-256 de Test o Producción
-    IzipayController::setDefaultHmacSha256("~ CHANGE_ME_HMAC_SHA_256 ~");
-
-    // URL del servidor de Izipay
-    IzipayController::setDefaultEndpointApiRest("https://api.micuentaweb.pe");
+// Clave HMAC-SHA-256 de Test o Producción
+define("HMAC_SHA256","~ CHANGE_ME_HMAC_SHA_256 ~");
+```
 
 ### Ejecutar proyecto
 
@@ -93,21 +86,17 @@ git clone https://github.com/izipay-pe/Embedded-PaymentForm-Php.git
   <img src="https://i.postimg.cc/pT6SRjxZ/3-pasos.png" alt="Formulario" />
 </p>
 
-## Pasos 1: Desplegar pasarela
-#### Etapa 1: Autentificación
-Extraer las claves del Backoffice
+## 1️⃣: Desplegar pasarela
+#### Autentificación
+Extraer las claves del Backoffice, concatenar `usuario:contraseña` y encriptarlo en base64
 ```php
-// Codificar las credenciales en base64
-$base64Credentials = base64_encode($credentials);
-
-// Encabezados de la solicitud
-$headers = array(
-    "Authorization: Basic " . $base64Credentials,
-    "Content-Type: application/json"
-);
+$auth = $this->_username . ":" . $this->_password;
+...
+curl_setopt($curl, CURLOPT_USERPWD, $auth);
+curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 ```
-#### Etapa 2: Crear formtoken
-Se realizará una solicitud POST a nuestra api `https://api.micuentaweb.pe/api-payment/V4/Charge/CreatePayment` con los datos de la compra para generar el formtoken
+#### Crear formtoken
+Se realizará una solicitud POST a la api `https://api.micuentaweb.pe/api-payment/V4/Charge/CreatePayment` con los datos de la compra para generar el formtoken
 
 ```php
 function formToken(){
@@ -117,17 +106,8 @@ function formToken(){
         "orderId" => $_POST["orderId"],
         "customer" => [
           "email" => $_POST["email"],
-          "billingDetails" => [
-            "firstName"=>  $_POST["firstName"],
-            "lastName"=>  $_POST["lastName"],
-            "phoneNumber"=>  $_POST["phoneNumber"],
-            "identityType"=>  $_POST["identityType"],
-            "identityCode"=>  $_POST["identityCode"],
-            "address"=>  $_POST["address"],
-            "country"=>  $_POST["country"],
-            "city"=>  $_POST["city"],
-            "state"=>  $_POST["state"],
-            "zipCode"=>  $_POST["zipCode"],
+           ...
+           ...
           ]
         ],
     ];
@@ -136,14 +116,8 @@ function formToken(){
     $auth = USERNAME.":".PASSWORD;
 
     $curl = curl_init($url);
-    curl_setopt($curl, CURLOPT_HEADER, false);
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($curl, CURLOPT_HTTPHEADER, array("Content-type: application/json"));
-    curl_setopt($curl, CURLOPT_POST, true);
-    curl_setopt($curl, CURLOPT_USERPWD, $auth);
-    curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-    curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($body));
-    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+    ...
+    ...
     curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
     $raw_response = curl_exec($curl);
     $response = json_decode($raw_response , true);
@@ -151,11 +125,35 @@ function formToken(){
 }
 
 ```
+#### Visualizar formulario
+Se inserta en el header los scripts de la libreria junto al `publicKey`
+
+Header:
+```php
+    <script type="text/javascript"
+    src="https://static.micuentaweb.pe/static/js/krypton-client/V4.0/stable/kr-payment-form.min.js"
+    kr-public-key="<?= PUBLIC_KEY ?>"
+    kr-post-url-success="result.php" kr-language="es-Es">
+    </script>
+    
+    <link rel="stylesheet" href="https://static.micuentaweb.pe/static/js/krypton-client/V4.0/ext/classic.css">
+    <script type="text/javascript" src="https://static.micuentaweb.pe/static/js/krypton-client/V4.0/ext/classic.js"></script>
+```
+Se inserta en el body la clase `kr-embedded` que deberá tener el parámetro `kr-form-token` generado en la etapa anterior
+
+Body:
+```php
+    <div id="micuentawebstd_rest_wrapper">
+      <div class="kr-embedded" kr-form-token="<?= $formToken; ?>"></div>
+    </div>
+```
 
 
-## Pasos 2: Analizar resultado del pago
+## 2️⃣ Analizar resultado del pago
 
-#### Etapa 4: Validación de firma
+#### Validación de firma
+Se configura una la función `checkhash` que realizará la validación de los datos del parámetro `kr-answer` utilizando una clave de encriptacón definida por el parámetro `kr-hash-key`
+
 ```php
 function checkHash(){
     if ($_POST['kr-hash-key'] == "sha256_hmac") {
@@ -173,19 +171,26 @@ function checkHash(){
 }
 ```
 
-#### Etapa 6: IPN
-La IPN es una notificación de servidor a servidor (servidor de Izipay hacia el servidor del comercio) que facilita información en tiempo real y de manera automática cuando se produce un evento, por ejemplo, al registrar una transacción.
-Los datos transmitidos en la IPN se reciben y analizan mediante un script que el vendedor habrá desarrollado en su servidor.
-
+Verificar si la firma recibida es correcta
 
 ```php
-<?php
-require_once "keys.example.php";
-
-if (empty($_POST)) {
-    throw new Exception("No post data received!");
+if (!checkHash()) {
+  throw new Exception("Invalid signature");
 }
+```
+En caso afirmativo se puede extraer los datos de kr-answer y mostrar un mensaje indicando que el pago ha sido exitoso
 
+```php
+$answer = json_decode($_POST["kr-answer"], true);
+```
+
+#### IPN
+La IPN es una notificación de servidor a servidor (servidor de Izipay hacia el servidor del comercio) que facilita información en tiempo real y de manera automática cuando se produce un evento, por ejemplo, al registrar una transacción.
+
+
+Se realiza la verificación de la firma y se devuelve al servidor de izipay un mensaje confirmando el estado del pago.
+
+```php
 if (!checkHash()) {
     throw new Exception("Invalid signature");
 }
@@ -201,15 +206,14 @@ $transactionUuid = $transaction['uuid'];
 print 'OK! OrderStatus is ' . $orderStatus;
 ```
 
-La IPN debe ir configurada en el Backoffice Vendedor, en Configuración -> Reglas de notificación -> URL de notificación al final del pago
+La IPN debe ir configurada en el Backoffice Vendedor, en `Configuración -> Reglas de notificación -> URL de notificación al final del pago`
 
 <p align="center">
   <img src="https://i.postimg.cc/CLqKyHYc/ipn.png" alt="Formulario" width=100%/>
 </p>
 
 
-### Pruebas en test
-Transacción de prueba
+### Transacción de prueba
 
 Antes de poner en marcha su pasarela de pago en un entorno de producción, es esencial realizar pruebas para garantizar su correcto funcionamiento.
 
@@ -221,28 +225,24 @@ Puede intentar realizar una transacción utilizando una tarjeta de prueba con la
 
 - También puede encontrar tarjetas de prueba en el siguiente enlace. [Tarjetas de prueba](https://secure.micuentaweb.pe/doc/es-PE/rest/V4.0/api/kb/test_cards.html)
 
-## Pasos 3: Pase a producción
+## 3️⃣Pase a producción
 
-**Nota**: Reemplace **[CHANGE_ME]** con sus credenciales de `API REST` extraídas desde el Back Office Vendedor, ver [Requisitos Previos](#Requisitos_Previos).
+**Nota**: Reemplace **[CHANGE_ME]** con sus credenciales de PRODUCCIÓN de `API REST` extraídas desde el Back Office Vendedor, ver [Requisitos Previos](#Requisitos_Previos).
 
 - Editar en `keys.example.php` en la ruta raiz del proyecto:
+```php
+// Identificador de su tienda
+define("USERNAME", "~ CHANGE_ME_USER_ID ~");
 
-    ```sh
-    // Identificador de su tienda
-    IzipayController::setDefaultUsername("~ CHANGE_ME_USER_ID ~");
+// Clave de Test o Producción
+define("PASSWORD", "~ CHANGE_ME_PASSWORD ~");
 
-    // Clave de Test o Producción
-    IzipayController::setDefaultPassword("~ CHANGE_ME_PASSWORD ~");
+// Clave Pública de Test o Producción
+define("PUBLIC_KEY","~ CHANGE_ME_PUBLIC_KEY ~");
 
-    // Clave Pública de Test o Producción
-    IzipayController::setDefaultPublicKey("~ CHANGE_ME_PUBLIC_KEY ~");
-
-    // Clave HMAC-SHA-256 de Test o Producción
-    IzipayController::setDefaultHmacSha256("~ CHANGE_ME_HMAC_SHA_256 ~");
-
-    // URL del servidor de Izipay
-    IzipayController::setDefaultEndpointApiRest("https://api.micuentaweb.pe");
-
+// Clave HMAC-SHA-256 de Test o Producción
+define("HMAC_SHA256","~ CHANGE_ME_HMAC_SHA_256 ~");
+```
 
 ## 5. Personalización
 

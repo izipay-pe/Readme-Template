@@ -80,7 +80,7 @@ define("HMAC_SHA256","~ CHANGE_ME_HMAC_SHA_256 ~");
 2.  Abrir el navegador web(Chrome, Mozilla, Safari, etc) con el puerto 80 que abrió xampp : `http://localhost:80/[nombre_de_proyecto]` y realizar una compra de prueba.
 
 
-## 4. Pasos de integración
+## 🔗4. Pasos de integración
 
 <p align="center">
   <img src="https://i.postimg.cc/pT6SRjxZ/3-pasos.png" alt="Formulario" />
@@ -245,7 +245,7 @@ define("PUBLIC_KEY","~ CHANGE_ME_PUBLIC_KEY ~");
 define("HMAC_SHA256","~ CHANGE_ME_HMAC_SHA_256 ~");
 ```
 
-## 5. Personalización
+## 🎨 5. Personalización
 
 Si deseas aplicar cambios específicos en la apariencia de la pasarela de pago, puedes lograrlo mediante la modificación de código CSS. En este enlace [Código CSS - Incrustado](https://github.com/izipay-pe/Personalizacion/blob/main/Formulario%20Incrustado/Style-Personalization-Incrustado.css) podrá encontrar nuestro script para un formulario incrustado.
 
@@ -253,7 +253,7 @@ Si deseas aplicar cambios específicos en la apariencia de la pasarela de pago, 
   <img src="https://i.postimg.cc/zDddmKpH/persona.png" alt="Formulario"/>
 </p>
 
-## 6. Consideraciones
+## 📚 6. Consideraciones
 
 Para obtener más información, echa un vistazo a:
 

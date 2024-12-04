@@ -87,7 +87,7 @@ define("HMAC_SHA256","~ CHANGE_ME_HMAC_SHA_256 ~");
 </p>
 
 ## 1️⃣: Desplegar pasarela
-#### Autentificación
+### Autentificación
 Extraer las claves del Backoffice, concatenar `usuario:contraseña` y encriptarlo en base64
 ```php
 $auth = $this->_username . ":" . $this->_password;
@@ -95,7 +95,7 @@ $auth = $this->_username . ":" . $this->_password;
 curl_setopt($curl, CURLOPT_USERPWD, $auth);
 curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 ```
-#### Crear formtoken
+### Crear formtoken
 Se realizará una solicitud POST a la api `https://api.micuentaweb.pe/api-payment/V4/Charge/CreatePayment` con los datos de la compra para generar el formtoken
 
 ```php
@@ -125,7 +125,7 @@ function formToken(){
 }
 
 ```
-#### Visualizar formulario
+### Visualizar formulario
 Se inserta en el header los scripts de la libreria junto al `publicKey`
 
 Header:
@@ -152,7 +152,7 @@ Body:
 
 ## 2️⃣: Analizar resultado del pago
 
-#### Validación de firma
+### Validación de firma
 Se configura una la función `checkhash` que realizará la validación de los datos del parámetro `kr-answer` utilizando una clave de encriptacón definida por el parámetro `kr-hash-key`
 
 ```php
@@ -185,7 +185,7 @@ En caso afirmativo se puede extraer los datos de kr-answer y mostrar un mensaje 
 $answer = json_decode($_POST["kr-answer"], true);
 ```
 
-#### IPN
+### IPN
 La IPN es una notificación de servidor a servidor (servidor de Izipay hacia el servidor del comercio) que facilita información en tiempo real y de manera automática cuando se produce un evento, por ejemplo, al registrar una transacción.
 
 

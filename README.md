@@ -210,7 +210,7 @@ print 'OK! OrderStatus is ' . $orderStatus;
 La IPN debe ir configurada en el Backoffice Vendedor, en `Configuración -> Reglas de notificación -> URL de notificación al final del pago`
 
 <p align="center">
-  <img src="https://i.postimg.cc/CLqKyHYc/ipn.png" alt="Formulario" width=100%/>
+  <img src="https://i.postimg.cc/zfx5JbQP/ipn.png" alt="Formulario" width=80%/>
 </p>
 
 

@@ -129,7 +129,7 @@ function formToken(){
 Se inserta en el header los scripts de la libreria junto al `publicKey`
 
 Header:
-```php
+```javascript
     <script type="text/javascript"
     src="https://static.micuentaweb.pe/static/js/krypton-client/V4.0/stable/kr-payment-form.min.js"
     kr-public-key="<?= PUBLIC_KEY ?>"
@@ -142,14 +142,14 @@ Header:
 Se inserta en el body la clase `kr-embedded` que deberá tener el parámetro `kr-form-token` generado en la etapa anterior
 
 Body:
-```php
+```javascript
     <div id="micuentawebstd_rest_wrapper">
       <div class="kr-embedded" kr-form-token="<?= $formToken; ?>"></div>
     </div>
 ```
 
 
-## 2️⃣ Analizar resultado del pago
+## 2️⃣: Analizar resultado del pago
 
 #### Validación de firma
 Se configura una la función `checkhash` que realizará la validación de los datos del parámetro `kr-answer` utilizando una clave de encriptacón definida por el parámetro `kr-hash-key`
@@ -225,7 +225,7 @@ Puede intentar realizar una transacción utilizando una tarjeta de prueba con la
 
 - También puede encontrar tarjetas de prueba en el siguiente enlace. [Tarjetas de prueba](https://secure.micuentaweb.pe/doc/es-PE/rest/V4.0/api/kb/test_cards.html)
 
-## 3️⃣Pase a producción
+## 3️⃣:Pase a producción
 
 **Nota**: Reemplace **[CHANGE_ME]** con sus credenciales de PRODUCCIÓN de `API REST` extraídas desde el Back Office Vendedor, ver [Requisitos Previos](#Requisitos_Previos).
 

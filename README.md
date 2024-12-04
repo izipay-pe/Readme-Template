@@ -130,22 +130,23 @@ Se inserta en el header los scripts de la libreria junto al `publicKey`
 
 Header:
 ```javascript
-    <script type="text/javascript"
-    src="https://static.micuentaweb.pe/static/js/krypton-client/V4.0/stable/kr-payment-form.min.js"
-    kr-public-key="<?= PUBLIC_KEY ?>"
-    kr-post-url-success="result.php" kr-language="es-Es">
-    </script>
-    
-    <link rel="stylesheet" href="https://static.micuentaweb.pe/static/js/krypton-client/V4.0/ext/classic.css">
-    <script type="text/javascript" src="https://static.micuentaweb.pe/static/js/krypton-client/V4.0/ext/classic.js"></script>
+<script type="text/javascript"
+src="https://static.micuentaweb.pe/static/js/krypton-client/V4.0/stable/kr-payment-form.min.js"
+kr-public-key="<?= PUBLIC_KEY ?>"
+kr-post-url-success="result.php" kr-language="es-Es">
+</script>
+
+<link rel="stylesheet" href="https://static.micuentaweb.pe/static/js/krypton-client/V4.0/ext/classic.css">
+<script type="text/javascript" src="https://static.micuentaweb.pe/static/js/krypton-client/V4.0/ext/classic.js">
+</script>
 ```
 Se inserta en el body la clase `kr-embedded` que deberá tener el parámetro `kr-form-token` generado en la etapa anterior
 
 Body:
 ```javascript
-    <div id="micuentawebstd_rest_wrapper">
-      <div class="kr-embedded" kr-form-token="<?= $formToken; ?>"></div>
-    </div>
+<div id="micuentawebstd_rest_wrapper">
+  <div class="kr-embedded" kr-form-token="<?= $formToken; ?>"></div>
+</div>
 ```
 
 

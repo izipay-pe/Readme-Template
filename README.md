@@ -10,9 +10,9 @@
 🔑 [2. Requisitos previos](#2-requisitos-previos)  
 🚀 [3. Ejecutar ejemplo](#3-despliegue)  
 🔗 [4. Pasos de integración](#4-datos-de-conexión)  
-💻 [Paso 1: Desplegar pasarela](#4-datos-de-conexión)  
-💳 [Paso 2: Analizar resultado de pago](#5-transacción-de-prueba)  
-📡 [Paso 3: Pase a producción](#6-implementación-de-la-ipn)  
+💻 [4.1. Desplegar pasarela](#4-datos-de-conexión)  
+💳 [4.2. Analizar resultado de pago](#5-transacción-de-prueba)  
+📡 [4.3. Pase a producción](#6-implementación-de-la-ipn)  
 🎨 [5. Personalización](#7-personalización)  
 📚 [6. Consideraciones](#8-consideraciones)
 
@@ -86,7 +86,7 @@ define("HMAC_SHA256","~ CHANGE_ME_HMAC_SHA_256 ~");
   <img src="https://i.postimg.cc/pT6SRjxZ/3-pasos.png" alt="Formulario" />
 </p>
 
-## 1️⃣: Desplegar pasarela
+## 💻4.1. Desplegar pasarela
 ### Autentificación
 Extraer las claves del Backoffice, concatenar `usuario:contraseña` y encriptarlo en base64
 ```php
@@ -150,7 +150,7 @@ Body:
 ```
 
 
-## 2️⃣: Analizar resultado del pago
+## 💳4.2. Analizar resultado del pago
 
 ### Validación de firma
 Se configura una la función `checkhash` que realizará la validación de los datos del parámetro `kr-answer` utilizando una clave de encriptacón definida por el parámetro `kr-hash-key`
@@ -226,7 +226,7 @@ Puede intentar realizar una transacción utilizando una tarjeta de prueba con la
 
 - También puede encontrar tarjetas de prueba en el siguiente enlace. [Tarjetas de prueba](https://secure.micuentaweb.pe/doc/es-PE/rest/V4.0/api/kb/test_cards.html)
 
-## 3️⃣:Pase a producción
+## 📡4.3.Pase a producción
 
 **Nota**: Reemplace **[CHANGE_ME]** con sus credenciales de PRODUCCIÓN de `API REST` extraídas desde el Back Office Vendedor, ver [Requisitos Previos](#Requisitos_Previos).
 

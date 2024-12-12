@@ -58,7 +58,7 @@ git clone https://github.com/izipay-pe/Embedded-PaymentForm-Php.git
 
 Reemplace **[CHANGE_ME]** con sus credenciales de `API REST` extraídas desde el Back Office Vendedor, revisar **🔑 2. Requisitos Previos**.
 
-- Editar en `keys.example.php` en la ruta raiz del proyecto:
+- Editar el archivo `keys.example.php` en la ruta raiz del proyecto:
 ```php
 // Identificador de su tienda
 define("USERNAME", "~ CHANGE_ME_USER_ID ~");

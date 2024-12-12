@@ -88,9 +88,10 @@ define("HMAC_SHA256","~ CHANGE_ME_HMAC_SHA_256 ~");
 
 ## 💻4.1. Desplegar pasarela
 ### Autentificación
-Extraer las claves del Backoffice (ver [Requisitos Previos](#Requisitos_Previos)), concatenar `usuario:contraseña` y colocarlo en la cabecera de la solicitud en el parámetro `Authorization`
+Extraer las claves del Backoffice (ver [Requisitos Previos](#Requisitos_Previos)), concatenar `usuario:contraseña` y agregarlo en la solicitud del encabezado `Authorization`.
 ```php
 $auth = $this->_username . ":" . $this->_password;
+...
 ...
 curl_setopt($curl, CURLOPT_USERPWD, $auth);
 curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
@@ -128,9 +129,10 @@ function formToken(){
 ```
 📘 Para más información: [Formtoken](https://secure.micuentaweb.pe/doc/es-PE/rest/V4.0/javascript/guide/embedded/formToken.html)
 ### Visualizar formulario
-Para desplegar la pasarela se necesita insertar en el header los scripts de la libreria y colocar la llave `publick key` extraída del Back Office Vendedor.
+Para desplegar la pasarela, configura la llave `public key` en el encabezado (Header) del archivo `checkout.php`. Esta llave debe ser extraída desde el Back Office del Vendedor.
 
-Header:
+Header: 
+Se coloca el script de la libreria necesaria para importar las funciones y clases principales de la pasarela.
 ```javascript
 <script type="text/javascript"
 src="https://static.micuentaweb.pe/static/js/krypton-client/V4.0/stable/kr-payment-form.min.js"
@@ -142,7 +144,7 @@ kr-post-url-success="result.php" kr-language="es-Es">
 <script type="text/javascript" src="https://static.micuentaweb.pe/static/js/krypton-client/V4.0/ext/classic.js">
 </script>
 ```
-Además, se inserta en el body un div con la clase `kr-embedded` que deberá tener el `formtoken` generado en la etapa anterior.
+Además, se inserta en el body una etiqueta div con la clase `kr-embedded` que deberá tener el atributo `kr-form-token` e incrustarle el `formtoken` generado en la etapa anterior.
 
 Body:
 ```javascript

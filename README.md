@@ -56,7 +56,7 @@ git clone https://github.com/izipay-pe/Embedded-PaymentForm-Php.git
 
 ### Datos de conexión 
 
-Reemplace **[CHANGE_ME]** con sus credenciales de `API REST` extraídas desde el Back Office Vendedor, revisar **🔑 2. Requisitos Previos**.
+Reemplace **[CHANGE_ME]** con sus credenciales de `API REST` extraídas desde el Back Office Vendedor, revisar [Requisitos previos](https://github.com/izipay-pe/Readme-Template/tree/main?tab=readme-ov-file#-2-requisitos-previos).
 
 - Editar el archivo `keys.example.php` en la ruta raiz del proyecto:
 ```php
@@ -88,7 +88,7 @@ define("HMAC_SHA256","~ CHANGE_ME_HMAC_SHA_256 ~");
 
 ## 💻4.1. Desplegar pasarela
 ### Autentificación
-Extraer las claves del Backoffice (ver [Requisitos Previos](#Requisitos_Previos)), concatenar `usuario:contraseña` y agregarlo en la solicitud del encabezado `Authorization`.
+Extraer las claves de `usuario` y `contraseña` del Backoffice Vendedor, concatenar `usuario:contraseña` y agregarlo en la solicitud del encabezado `Authorization`.
 ```php
 $auth = $this->_username . ":" . $this->_password;
 ...

@@ -7,14 +7,14 @@
 ## Índice
 
 ➡️ [1. Introducción](https://github.com/izipay-pe/Readme-Template/tree/main?tab=readme-ov-file#%EF%B8%8F-1-introducci%C3%B3n)  
-🔑 [2. Requisitos previos](#2-requisitos-previos)  
-🚀 [3. Ejecutar ejemplo](#3-despliegue)  
-🔗 [4. Pasos de integración](#4-datos-de-conexión)  
-💻 [4.1. Desplegar pasarela](#4-datos-de-conexión)  
-💳 [4.2. Analizar resultado de pago](#5-transacción-de-prueba)  
-📡 [4.3. Pase a producción](#6-implementación-de-la-ipn)  
-🎨 [5. Personalización](#7-personalización)  
-📚 [6. Consideraciones](#8-consideraciones)
+🔑 [2. Requisitos previos](https://github.com/izipay-pe/Readme-Template/tree/main?tab=readme-ov-file#-2-requisitos-previos)  
+🚀 [3. Ejecutar ejemplo](https://github.com/izipay-pe/Readme-Template/tree/main?tab=readme-ov-file#-3-ejecutar-ejemplo)  
+🔗 [4. Pasos de integración](https://github.com/izipay-pe/Readme-Template/tree/main?tab=readme-ov-file#4-pasos-de-integraci%C3%B3n)  
+💻 [4.1. Desplegar pasarela](https://github.com/izipay-pe/Readme-Template/tree/main?tab=readme-ov-file#41-desplegar-pasarela)  
+💳 [4.2. Analizar resultado de pago](https://github.com/izipay-pe/Readme-Template/tree/main?tab=readme-ov-file#42-analizar-resultado-del-pago)  
+📡 [4.3. Pase a producción](https://github.com/izipay-pe/Readme-Template/tree/main?tab=readme-ov-file#43pase-a-producci%C3%B3n)  
+🎨 [5. Personalización](https://github.com/izipay-pe/Readme-Template/tree/main?tab=readme-ov-file#-5-personalizaci%C3%B3n)  
+📚 [6. Consideraciones](https://github.com/izipay-pe/Readme-Template/tree/main?tab=readme-ov-file#-6-consideraciones)
 
 ## ➡️ 1. Introducción
 

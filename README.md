@@ -96,7 +96,7 @@ $auth = $this->_username . ":" . $this->_password;
 curl_setopt($curl, CURLOPT_USERPWD, $auth);
 curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 ```
-📘 Para más información: [Autentificación](https://secure.micuentaweb.pe/doc/es-PE/rest/V4.0/javascript/guide/embedded/keys.html)
+ℹ️ Para más información: [Autentificación](https://secure.micuentaweb.pe/doc/es-PE/rest/V4.0/javascript/guide/embedded/keys.html)
 ### Crear formtoken
 Para configurar la pasarela se necesita generar un formtoken. Se realizará una solicitud API REST a la api de creación de pagos:  `https://api.micuentaweb.pe/api-payment/V4/Charge/CreatePayment` con los datos de la compra para generar el formtoken
 
@@ -127,7 +127,7 @@ function formToken(){
 }
 
 ```
-📘 Para más información: [Formtoken](https://secure.micuentaweb.pe/doc/es-PE/rest/V4.0/javascript/guide/embedded/formToken.html)
+ℹ️ Para más información: [Formtoken](https://secure.micuentaweb.pe/doc/es-PE/rest/V4.0/javascript/guide/embedded/formToken.html)
 ### Visualizar formulario
 Para desplegar la pasarela, configura la llave `public key` en el encabezado (Header) del archivo `checkout.php`. Esta llave debe ser extraída desde el Back Office del Vendedor.
 
@@ -152,7 +152,7 @@ Body:
   <div class="kr-embedded" kr-form-token="<?= $formToken; ?>"></div>
 </div>
 ```
-📘 Para más información: [Visualizar formulario](https://secure.micuentaweb.pe/doc/es-PE/rest/V4.0/javascript/guide/embedded/formToken.html)
+ℹ️ Para más información: [Visualizar formulario](https://secure.micuentaweb.pe/doc/es-PE/rest/V4.0/javascript/guide/embedded/formToken.html)
 
 ## 💳4.2. Analizar resultado del pago
 
@@ -188,7 +188,7 @@ En caso que la validación sea exitosa, se puede extraer los datos de `kr-answer
 ```php
 $answer = json_decode($_POST["kr-answer"], true);
 ```
-📘 Para más información: [Analizar resultado del pago](https://secure.micuentaweb.pe/doc/es-PE/rest/V4.0/kb/payment_done.html)
+ℹ️ Para más información: [Analizar resultado del pago](https://secure.micuentaweb.pe/doc/es-PE/rest/V4.0/kb/payment_done.html)
 
 ### IPN
 La IPN es una notificación de servidor a servidor (servidor de Izipay hacia el servidor del comercio) que facilita información en tiempo real y de manera automática cuando se produce un evento, por ejemplo, al registrar una transacción.
@@ -218,7 +218,7 @@ La IPN debe ir configurada en el Backoffice Vendedor, en `Configuración -> Regl
   <img src="https://i.postimg.cc/zfx5JbQP/ipn.png" alt="Formulario" width=80%/>
 </p>
 
-📘 Para más información: [Analizar IPN](https://secure.micuentaweb.pe/doc/es-PE/rest/V4.0/api/kb/ipn_usage.html)
+ℹ️ Para más información: [Analizar IPN](https://secure.micuentaweb.pe/doc/es-PE/rest/V4.0/api/kb/ipn_usage.html)
 
 ### Transacción de prueba
 
@@ -234,7 +234,7 @@ Puede intentar realizar una transacción utilizando una tarjeta de prueba con la
 
 ## 📡4.3.Pase a producción
 
-Reemplace **[CHANGE_ME]** con sus credenciales de PRODUCCIÓN de `API REST` extraídas desde el Back Office Vendedor, ver [Requisitos Previos](#Requisitos_Previos).
+Reemplace **[CHANGE_ME]** con sus credenciales de PRODUCCIÓN de `API REST` extraídas desde el Back Office Vendedor, ver [Requisitos Previos](https://github.com/izipay-pe/Readme-Template/tree/main?tab=readme-ov-file#-2-requisitos-previos).
 
 - Editar en `keys.example.php` en la ruta raiz del proyecto:
 ```php

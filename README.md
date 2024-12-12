@@ -56,7 +56,7 @@ git clone https://github.com/izipay-pe/Embedded-PaymentForm-Php.git
 
 ### Datos de conexión 
 
-Reemplace **[CHANGE_ME]** con sus credenciales de `API REST` extraídas desde el Back Office Vendedor, resivar aparatdo [2.Requisitos Previos](#2.Requisitos Previos).
+Reemplace **[CHANGE_ME]** con sus credenciales de `API REST` extraídas desde el Back Office Vendedor, resivar apartado [2.Requisitos Previos](#2-requisitos-previos).
 
 - Editar en `keys.example.php` en la ruta raiz del proyecto:
 ```php

@@ -234,7 +234,7 @@ Puede intentar realizar una transacción utilizando una tarjeta de prueba con la
 
 ## 📡4.3.Pase a producción
 
-Reemplace **[CHANGE_ME]** con sus credenciales de PRODUCCIÓN de `API REST` extraídas desde el Back Office Vendedor, ver [Requisitos Previos](https://github.com/izipay-pe/Readme-Template/tree/main?tab=readme-ov-file#-2-requisitos-previos).
+Reemplace **[CHANGE_ME]** con sus credenciales de PRODUCCIÓN de `API REST` extraídas desde el Back Office Vendedor, revisar [Requisitos Previos](https://github.com/izipay-pe/Readme-Template/tree/main?tab=readme-ov-file#-2-requisitos-previos).
 
 - Editar en `keys.example.php` en la ruta raiz del proyecto:
 ```php

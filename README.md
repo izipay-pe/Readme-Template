@@ -6,7 +6,7 @@
 
 ## Índice
 
-➡️ [1. Introducción](#1-introducción)
+➡️ [1. Introducción](https://github.com/izipay-pe/Readme-Template/tree/main?tab=readme-ov-file#%EF%B8%8F-1-introducci%C3%B3n)  
 🔑 [2. Requisitos previos](#2-requisitos-previos)  
 🚀 [3. Ejecutar ejemplo](#3-despliegue)  
 🔗 [4. Pasos de integración](#4-datos-de-conexión)  

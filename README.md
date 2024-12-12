@@ -33,6 +33,7 @@ Este manual está diseñado para ayudarte a comprender el flujo de la integraci�
 - Comprender el flujo de comunicación de la pasarela. [Información Aquí](https://secure.micuentaweb.pe/doc/es-PE/rest/V4.0/javascript/guide/start.html)
 - Extraer credenciales del Back Office Vendedor. [Guía Aquí](https://github.com/izipay-pe/obtener-credenciales-de-conexion)
 - Para este proyecto utilizamos la herramienta Visual Studio Code.
+- Servidor Web
 - PHP 7.0 o superior
 > [!NOTE]
 > Tener en cuenta que, para que el desarrollo de tu proyecto, eres libre de emplear tus herramientas preferidas.
@@ -55,7 +56,7 @@ git clone https://github.com/izipay-pe/Embedded-PaymentForm-Php.git
 
 ### Datos de conexión 
 
-**Nota**: Reemplace **[CHANGE_ME]** con sus credenciales de `API REST` extraídas desde el Back Office Vendedor, ver [Requisitos Previos](#Requisitos_Previos).
+Reemplace **[CHANGE_ME]** con sus credenciales de `API REST` extraídas desde el Back Office Vendedor, ver [Requisitos Previos](#Requisitos_Previos).
 
 - Editar en `keys.example.php` en la ruta raiz del proyecto:
 ```php
@@ -76,7 +77,7 @@ define("HMAC_SHA256","~ CHANGE_ME_HMAC_SHA_256 ~");
 
 1. Mover el proyecto y descomprimirlo en la carpeta htdocs en la ruta de instalación de Xampp: `C://xampp/htdocs/[proyecto_php]`
 
-2. Abrir el navegador web(Chrome, Mozilla, Safari, etc) con el puerto 80 que abrió xampp : `http://localhost:80/[nombre_de_proyecto]` y realizar una compra de prueba.
+2.  Abrir el navegador web(Chrome, Mozilla, Safari, etc) con el puerto 80 que abrió xampp : `http://localhost:80/[nombre_de_proyecto]` y realizar una compra de prueba.
 
 
 ## 🔗4. Pasos de integración
@@ -87,15 +88,16 @@ define("HMAC_SHA256","~ CHANGE_ME_HMAC_SHA_256 ~");
 
 ## 💻4.1. Desplegar pasarela
 ### Autentificación
-Extraer las claves del Backoffice, concatenar `usuario:contraseña` y encriptarlo en base64
+Extraer las claves del Backoffice (ver [Requisitos Previos](#Requisitos_Previos)), concatenar `usuario:contraseña` y colocarlo en la cabecera de la solicitud en el parámetro `Authorization`
 ```php
 $auth = $this->_username . ":" . $this->_password;
 ...
 curl_setopt($curl, CURLOPT_USERPWD, $auth);
 curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 ```
+📘 Para más información: [Autentificación](https://secure.micuentaweb.pe/doc/es-PE/rest/V4.0/javascript/guide/embedded/keys.html)
 ### Crear formtoken
-Se realizará una solicitud POST a la api `https://api.micuentaweb.pe/api-payment/V4/Charge/CreatePayment` con los datos de la compra para generar el formtoken
+Para configurar la pasarela se necesita generar un formtoken. Se realizará una solicitud API REST a la api de creación de pagos:  `https://api.micuentaweb.pe/api-payment/V4/Charge/CreatePayment` con los datos de la compra para generar el formtoken
 
 ```php
 function formToken(){
@@ -124,8 +126,9 @@ function formToken(){
 }
 
 ```
+📘 Para más información: [Formtoken](https://secure.micuentaweb.pe/doc/es-PE/rest/V4.0/javascript/guide/embedded/formToken.html)
 ### Visualizar formulario
-Se inserta en el header los scripts de la libreria junto al `publicKey`
+Para desplegar la pasarela se necesita insertar en el header los scripts de la libreria y colocar la llave `publick key` extraída del Back Office Vendedor.
 
 Header:
 ```javascript
@@ -139,7 +142,7 @@ kr-post-url-success="result.php" kr-language="es-Es">
 <script type="text/javascript" src="https://static.micuentaweb.pe/static/js/krypton-client/V4.0/ext/classic.js">
 </script>
 ```
-Se inserta en el body la clase `kr-embedded` que deberá tener el parámetro `kr-form-token` generado en la etapa anterior
+Además, se inserta en el body un div con la clase `kr-embedded` que deberá tener el `formtoken` generado en la etapa anterior.
 
 Body:
 ```javascript
@@ -147,12 +150,12 @@ Body:
   <div class="kr-embedded" kr-form-token="<?= $formToken; ?>"></div>
 </div>
 ```
-
+📘 Para más información: [Visualizar formulario](https://secure.micuentaweb.pe/doc/es-PE/rest/V4.0/javascript/guide/embedded/formToken.html)
 
 ## 💳4.2. Analizar resultado del pago
 
 ### Validación de firma
-Se configura una la función `checkhash` que realizará la validación de los datos del parámetro `kr-answer` utilizando una clave de encriptacón definida por el parámetro `kr-hash-key`
+Se configura la función `checkhash()` que realizará la validación de los datos del parámetro `kr-answer` utilizando una clave de encriptacón definida por el parámetro `kr-hash-key`
 
 ```php
 function checkHash(){
@@ -171,24 +174,25 @@ function checkHash(){
 }
 ```
 
-Verificar si la firma recibida es correcta
+Se valida que la firma recibida es correcta
 
 ```php
 if (!checkHash()) {
   throw new Exception("Invalid signature");
 }
 ```
-En caso afirmativo se puede extraer los datos de kr-answer y mostrar un mensaje indicando que el pago ha sido exitoso
+En caso que la validación sea exitosa, se puede extraer los datos de `kr-answer` a través de un JSON y mostrar los datos del pago realizado.
 
 ```php
 $answer = json_decode($_POST["kr-answer"], true);
 ```
+📘 Para más información: [Analizar resultado del pago](https://secure.micuentaweb.pe/doc/es-PE/rest/V4.0/kb/payment_done.html)
 
 ### IPN
 La IPN es una notificación de servidor a servidor (servidor de Izipay hacia el servidor del comercio) que facilita información en tiempo real y de manera automática cuando se produce un evento, por ejemplo, al registrar una transacción.
 
 
-Se realiza la verificación de la firma y se devuelve al servidor de izipay un mensaje confirmando el estado del pago.
+Se realiza la verificación de la firma utilizando la función `checkhash()` y se devuelve al servidor de izipay un mensaje confirmando el estado del pago.
 
 ```php
 if (!checkHash()) {
@@ -212,6 +216,7 @@ La IPN debe ir configurada en el Backoffice Vendedor, en `Configuración -> Regl
   <img src="https://i.postimg.cc/zfx5JbQP/ipn.png" alt="Formulario" width=80%/>
 </p>
 
+📘 Para más información: [Analizar IPN](https://secure.micuentaweb.pe/doc/es-PE/rest/V4.0/api/kb/ipn_usage.html)
 
 ### Transacción de prueba
 
@@ -227,7 +232,7 @@ Puede intentar realizar una transacción utilizando una tarjeta de prueba con la
 
 ## 📡4.3.Pase a producción
 
-**Nota**: Reemplace **[CHANGE_ME]** con sus credenciales de PRODUCCIÓN de `API REST` extraídas desde el Back Office Vendedor, ver [Requisitos Previos](#Requisitos_Previos).
+Reemplace **[CHANGE_ME]** con sus credenciales de PRODUCCIÓN de `API REST` extraídas desde el Back Office Vendedor, ver [Requisitos Previos](#Requisitos_Previos).
 
 - Editar en `keys.example.php` en la ruta raiz del proyecto:
 ```php

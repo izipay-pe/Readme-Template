@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://i.postimg.cc/5yCghqKM/Banner-750x100.png" alt="Formulario" width=100%/>
+  <img src="https://i.postimg.cc/ZYCMP6cH/Banner-1140x100.png" alt="Formulario" width=100%/>
 </p>
 
 # Embedded-PaymentForm-PHP

@@ -1,8 +1,9 @@
 <p align="center">
-  <img src="https://i.postimg.cc/ZYCMP6cH/Banner-1140x100.png" alt="Formulario" width=100%/>
+  <img src="https://github.com/izipay-pe/Imagenes/blob/main/logos_izipay/logo-izipay-banner-1140x100.png?raw=true" alt="Formulario" width=100%/>
 </p>
 
-# Embedded-PaymentForm-PHP
+# Redirect-PaymentForm-JavaScript
+## Proyectos por Lenguaje
 
 ## Índice
 
@@ -14,71 +15,62 @@
 💳 [4.2. Analizar resultado de pago](https://github.com/izipay-pe/Readme-Template/tree/main?tab=readme-ov-file#42-analizar-resultado-del-pago)  
 📡 [4.3. Pase a producción](https://github.com/izipay-pe/Readme-Template/tree/main?tab=readme-ov-file#43pase-a-producci%C3%B3n)  
 🎨 [5. Personalización](https://github.com/izipay-pe/Readme-Template/tree/main?tab=readme-ov-file#-5-personalizaci%C3%B3n)  
-📚 [6. Consideraciones](https://github.com/izipay-pe/Readme-Template/tree/main?tab=readme-ov-file#-6-consideraciones)
+🛠️ [6. Servidores](https://github.com/izipay-pe/Readme-Template/tree/main?tab=readme-ov-file#-6-consideraciones)  
+📚 [7. Consideraciones](https://github.com/izipay-pe/Readme-Template/tree/main?tab=readme-ov-file#-6-consideraciones)
 
 ## ➡️ 1. Introducción
 
-En este manual podrás encontrar una guía paso a paso para configurar un proyecto de **[PHP]** con la pasarela de pagos de IZIPAY. Te proporcionaremos instrucciones detalladas y credenciales de prueba para la instalación y configuración del proyecto, permitiéndote trabajar y experimentar de manera segura en tu propio entorno local.
-Este manual está diseñado para ayudarte a comprender el flujo de la integración de la pasarela para ayudarte a aprovechar al máximo tu proyecto y facilitar tu experiencia de desarrollo.
-
-> [!IMPORTANT]
-> En la última actualización se agregaron los campos: **nombre del tarjetahabiente** y **correo electrónico** (Este último campo se visualizará solo si el dato no se envía en la creación del formtoken).
+En este manual encontrarás una guía detallada para configurar un proyecto en **[JavaScript puro]** integrado con la pasarela de pagos de IZIPAY. Te proporcionaremos instrucciones claras y credenciales de prueba para instalar y configurar el proyecto, permitiéndote trabajar y realizar pruebas de manera segura en tu propio entorno local.
+Este manual está diseñado para facilitar la comprensión del flujo de integración de la pasarela de pagos y maximizar el rendimiento de tu desarrollo front-end. Ten en cuenta que este proyecto se conecta a un servidor (backend) para gestionar las operaciones críticas relacionadas con la pasarela de pagos.
 
 <p align="center">
-  <img src="https://github.com/izipay-pe/Imagenes/blob/main/formulario_incrustado/Imagen-Formulario-Incrustado.png" alt="Formulario" width="350"/>
+  <img src="https://github.com/izipay-pe/Imagenes/blob/main/formulario_redireccion/Imagen-Formulario-Redireccion.png?raw=true" alt="Formulario" width="750"/>
 </p>
 
 ## 🔑 2. Requisitos Previos
 
 - Comprender el flujo de comunicación de la pasarela. [Información Aquí](https://secure.micuentaweb.pe/doc/es-PE/rest/V4.0/javascript/guide/start.html)
 - Extraer credenciales del Back Office Vendedor. [Guía Aquí](https://github.com/izipay-pe/obtener-credenciales-de-conexion)
+- Descargar y ejecutar un servidor (Back) de redirección.[Servidores disponibles](https://secure.micuentaweb.pe/doc/es-PE/rest/V4.0/javascript/guide/start.html)
 - Para este proyecto utilizamos la herramienta Visual Studio Code.
-- Servidor Web
-- PHP 7.0 o superior
 > [!NOTE]
 > Tener en cuenta que, para que el desarrollo de tu proyecto, eres libre de emplear tus herramientas preferidas.
 
 ## 🚀 3. Ejecutar ejemplo
 
-### Instalar Xampp u otro servidor local compatible con php
-
-Xampp, servidor web local multiplataforma que contiene los intérpretes para los lenguajes de script de php. Para instalarlo:
-
-1. Dirigirse a la página web de [xampp](https://www.apachefriends.org/es/index.html)
-2. Descargarlo e instalarlo.
-3. Inicia los servicios de Apache desde el panel de control de XAMPP.
-
 
 ### Clonar el proyecto
 ```sh
-git clone https://github.com/izipay-pe/Embedded-PaymentForm-Php.git
+git clone https://github.com/izipay-pe/Redirect-PaymentForm-JavaScript.git
 ``` 
 
 ### Datos de conexión 
 
-Reemplace **[CHANGE_ME]** con sus credenciales de `API REST` extraídas desde el Back Office Vendedor, revisar [Requisitos previos](https://github.com/izipay-pe/Readme-Template/tree/main?tab=readme-ov-file#-2-requisitos-previos).
+Realice la conexión al servidor modificando la ruta `http://localhost:3000/redirect` mostrada a continuación.
 
-- Editar el archivo `keys.example.php` en la ruta raiz del proyecto:
-```php
-// Identificador de su tienda
-define("USERNAME", "~ CHANGE_ME_USER_ID ~");
+- Editar el archivo `js/capturaFormulario.js` en la ruta raiz del proyecto:
+```js
+const response = await fetch ('http://localhost:3000/redirect',{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data),
+      });
 
-// Clave de Test o Producción
-define("PASSWORD", "~ CHANGE_ME_PASSWORD ~");
-
-// Clave Pública de Test o Producción
-define("PUBLIC_KEY","~ CHANGE_ME_PUBLIC_KEY ~");
-
-// Clave HMAC-SHA-256 de Test o Producción
-define("HMAC_SHA256","~ CHANGE_ME_HMAC_SHA_256 ~");
 ```
 
 ### Ejecutar proyecto
 
-1. Mover el proyecto y descomprimirlo en la carpeta htdocs en la ruta de instalación de Xampp: `C://xampp/htdocs/[proyecto_php]`
+1. Ejecuta el siguiente comando para instalar todas las dependencias necesarias:
+```bash
+npm install
+```
 
-2.  Abrir el navegador web(Chrome, Mozilla, Safari, etc) con el puerto 80 que abrió xampp : `http://localhost:80/[nombre_de_proyecto]` y realizar una compra de prueba.
-
+2.  Iniciar la aplicación:
+```bash
+http-server
+```
 
 ## 🔗4. Pasos de integración
 
@@ -88,181 +80,270 @@ define("HMAC_SHA256","~ CHANGE_ME_HMAC_SHA_256 ~");
 
 ## 💻4.1. Desplegar pasarela
 ### Autentificación
-Extraer las claves de `usuario` y `contraseña` del Backoffice Vendedor, concatenar `usuario:contraseña` y agregarlo en la solicitud del encabezado `Authorization`.
-```php
-$auth = $this->_username . ":" . $this->_password;
-...
-...
-curl_setopt($curl, CURLOPT_USERPWD, $auth);
-curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-```
+Las claves de acceso del Backoffice Vendedor deben configurarse exclusivamente en el servidor (backend), no en la aplicación **[JavaScript]**. Esto asegura que las credenciales sensibles permanezcan protegidas y no sean expuestas en el código. 
+
 ℹ️ Para más información: [Autentificación](https://secure.micuentaweb.pe/doc/es-PE/rest/V4.0/javascript/guide/embedded/keys.html)
 ### Crear formtoken
-Para configurar la pasarela se necesita generar un formtoken. Se realizará una solicitud API REST a la api de creación de pagos:  `https://api.micuentaweb.pe/api-payment/V4/Charge/CreatePayment` con los datos de la compra para generar el formtoken
+Para configurar la pasarela, es necesario generar un formtoken. Esto se realiza mediante una solicitud API desde tu aplicación **[JavaScript]** al servidor (backend), el cual procesa los datos de la compra y devuelve el formtoken necesario. Estos son los datos de compra necesarios para generar el formtoken.
+```node
+  <form id="formulario" class="col-md-12">
+                <div class="row">
+                    <!-- Datos del cliente -->
+                    <div class="left-column col-md-6">
+                        <section class="customer-details">
+                            <h2>Datos del cliente</h2>
+                            <!-- Nombre -->
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="firstName">Nombre</label>
+                                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Nombre" required />
+                                </div>
+                                <!-- Apellido -->
+                                <div class="form-group col-md-6">
+                                    <label for="lastName">Apellido</label>
+                                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Apellido" required />
+                                </div>
+                            </div>
+                            <!-- Correo electronico -->
+                            <div class="form-group">
+                                <label for="email">Correo Electrónico</label>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Email" required />
+                            </div>
+                            <!-- Telefono -->
+                            <div class="form-group">
+                                <label for="phoneNumber">Teléfono</label>
+                                <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="999999999" required />
+                            </div>
+                            <!-- Tipo de Documento -->
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="identityType">Tipo de Documento</label>
+                                    <select class="form-control" id="identityType" name="identityType">
+                                        <option value="DNI">DNI</option>
+                                        <option value="PS">Pasaporte</option>
+                                        <option value="CE">Carné de Extranjería</option>
+                                    </select>
+                                </div>
+                                <!-- Documento -->
+                                <div class="form-group col-md-8">
+                                    <label for="identityCode">Documento</label>
+                                    <input type="text" class="form-control" id="identityCode" name="identityCode" placeholder="Doc. Identidad" required />
+                                </div>
+                            </div>
+                        </section>
 
-```php
-function formToken(){
-    $body = [
-        "amount" => $_POST["amount"] * 100,
-        "currency" => $_POST["currency"],
-        "orderId" => $_POST["orderId"],
-        "customer" => [
-          "email" => $_POST["email"],
-           ...
-           ...
-          ]
-        ],
-    ];
+                        <!-- Datos de envío -->
+                        <section class="billing-details">
+                            <h2>Datos de envío</h2>
+                            <!-- Direccion -->
+                            <div class="form-group">
+                                <label for="address">Dirección</label>
+                                <input type="text" class="form-control" id="address" name="address" placeholder="Nombre de la calle y número de casa" required />
+                            </div>
+                            <!-- Pais -->
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="country">País</label>
+                                    <select class="form-control" id="country" name="country">
+                                        <option value="PE">Perú</option>
+                                        <option value="AR">Argentina</option>
+                                        <option value="CL">Chile</option>
+                                        <option value="CO">Colombia</option>
+                                    </select>
+                                </div>
+                                <!-- Departamento -->
+                                <div class="form-group col-md-6">
+                                    <label for="state">Departamento</label>
+                                    <input type="text" class="form-control" id="state" name="state" placeholder="Departamento" required />
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <!-- Distrito -->
+                                <div class="form-group col-md-6">
+                                    <label for="city">Distrito</label>
+                                    <input type="text" class="form-control" id="city" name="city" placeholder="Distrito" required />
+                                </div>
+                                <!-- Codigo Postal -->
+                                <div class="form-group col-md-6">
+                                    <label for="zipCode">Código Postal</label>
+                                    <input type="text" class="form-control" id="zipCode" name="zipCode" placeholder="15021" required />
+                                </div>
+                            </div>
+                        </section>
+                    </div>
 
-    $url = "https://api.micuentaweb.pe/api-payment/V4/Charge/CreatePayment";
-    $auth = USERNAME.":".PASSWORD;
-
-    $curl = curl_init($url);
-    ...
-    ...
-    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-    $raw_response = curl_exec($curl);
-    $response = json_decode($raw_response , true);
-    return $response;
-}
+                    <!-- Datos del pago -->
+                    <div class="right-column col-md-6">
+                        <section class="customer-details">
+                            <h2>Datos del pago</h2>
+                            <!-- OrderId -->
+                            <div class="form-group">
+                                <label for="orderId">Order-id</label>
+                                <input type="text" class="form-control" id="orderId" name="orderId" required />
+                            </div>
+                            <!-- Monto -->
+                            <div class="form-group">
+                                <label for="amount">Monto</label>
+                                <input type="number" class="form-control" id="amount" name="amount" placeholder="0.00" step="0.01" min="0" required />
+                            </div>
+                            <!-- Moneda -->
+                            <div class="form-group">
+                                <label for="currency">Moneda</label>
+                                <select class="form-control" id="currency" name="currency">
+                                    <option value="604" data-display="Soles">Soles</option>
+                                    <option value="840" data-display="Dólares">Dólares</option>
+                                </select>
+                            </div> 
 
 ```
-ℹ️ Para más información: [Formtoken](https://secure.micuentaweb.pe/doc/es-PE/rest/V4.0/javascript/guide/embedded/formToken.html)
+Estos datos son capturados en `js/capturaFormulario.js`:
+
+```javascript
+
+document.getElementById('formulario').addEventListener('submit', async function (event) {
+event.preventDefault();
+
+```
+
+
 ### Visualizar formulario
-Para desplegar la pasarela, configura la llave `public key` en el encabezado (Header) del archivo `checkout.php`. Esta llave debe ser extraída desde el Back Office del Vendedor.
+Para desplegar la pasarela mediante redirección, es necesario recepcionar todos los datos que nos devuelve el servidor para enviárselos a IZIPAY mediante un formulario detallado a continuación en el archivo `checkout.html`
 
-Header: 
-Se coloca el script de la libreria necesaria para importar las funciones y clases principales de la pasarela.
 ```javascript
-<script type="text/javascript"
-src="https://static.micuentaweb.pe/static/js/krypton-client/V4.0/stable/kr-payment-form.min.js"
-kr-public-key="<?= PUBLIC_KEY ?>"
-kr-post-url-success="result.php" kr-language="es-Es">
-</script>
+<!-- Formulario con los datos de pago -->
+				<form class="from-checkout" action="https://secure.micuentaweb.pe/vads-payment/" method="post">
+				<!-- Inputs generados dinámicamente -->
+				<input type="hidden" name="vads_action_mode" id="vads_action_mode" />
+				<input type="hidden" name="vads_amount"  id="vads_amount" />
+				<input type="hidden" name="vads_ctx_mode"  id="vads_ctx_mode" />
+				<input type="hidden" name="vads_currency"  id="vads_currency" />
+				<input type="hidden" name="vads_cust_address"  id="vads_cust_address" />
+				<input type="hidden" name="vads_cust_cell_phone"  id="vads_cust_cell_phone" />
+				<input type="hidden" name="vads_cust_city"  id="vads_cust_city" />
+				<input type="hidden" name="vads_cust_country"  id="vads_cust_country" />
+				<input type="hidden" name="vads_cust_email"  id="vads_cust_email" />
+				<input type="hidden" name="vads_cust_first_name"  id="vads_cust_first_name" />
+				<input type="hidden" name="vads_cust_last_name"  id="vads_cust_last_name" />
+				<input type="hidden" name="vads_cust_national_id"  id="vads_cust_national_id" />
+				<input type="hidden" name="vads_cust_state"  id="vads_cust_state" />
+				<input type="hidden" name="vads_cust_zip"  id="vads_cust_zip" />
+				<input type="hidden" name="vads_order_id"  id="vads_order_id" />
+				<input type="hidden" name="vads_page_action"  id="vads_page_action" />
+				<input type="hidden" name="vads_payment_config"  id="vads_payment_config" />
+				<input type="hidden" name="vads_redirect_success_timeout"  id="vads_redirect_success_timeout" />
+				<input type="hidden" name="vads_return_mode"  id="vads_return_mode" />
+				<input type="hidden" name="vads_site_id"  id="vads_site_id" />
+				<input type="hidden" name="vads_trans_date"  id="vads_trans_date" />
+				<input type="hidden" name="vads_trans_id"  id="vads_trans_id" />
+				<input type="hidden" name="vads_url_success"  id="vads_url_success" />
+				<input type="hidden" name="vads_version"  id="vads_version" />
+				<input type="hidden" name="signature"  id="signature" />
+				<button class="btn btn-checkout" type="submit" name="pagar">Pagar</button>
+				</form>	
 
-<link rel="stylesheet" href="https://static.micuentaweb.pe/static/js/krypton-client/V4.0/ext/classic.css">
-<script type="text/javascript" src="https://static.micuentaweb.pe/static/js/krypton-client/V4.0/ext/classic.js">
-</script>
 ```
-Además, se inserta en el body una etiqueta div con la clase `kr-embedded` que deberá tener el atributo `kr-form-token` e incrustarle el `formtoken` generado en la etapa anterior.
 
-Body:
+Estos datos son recepcionados a través de `js/recepcionFormulario.js`: 
+
 ```javascript
-<div id="micuentawebstd_rest_wrapper">
-  <div class="kr-embedded" kr-form-token="<?= $formToken; ?>"></div>
-</div>
+
+   //Llenamos los datos a envíar
+          for (const key in serverData.parameters) {
+            const elementId = key;
+            const element = document.getElementById(elementId);
+            element.value = serverData.parameters[key];
+          }
+        } catch (error) {
+          console.error('Error al analizar los datos de sessionStorage:', error);
+        }
 ```
-ℹ️ Para más información: [Visualizar formulario](https://secure.micuentaweb.pe/doc/es-PE/rest/V4.0/javascript/guide/embedded/formToken.html)
 
 ## 💳4.2. Analizar resultado del pago
 
 ### Validación de firma
-Se configura la función `checkhash()` que realizará la validación de los datos del parámetro `kr-answer` utilizando una clave de encriptacón definida por el parámetro `kr-hash-key`
-
-```php
-function checkHash(){
-    if ($_POST['kr-hash-key'] == "sha256_hmac") {
-        $key = HMAC_SHA256;
-    } elseif ($_POST['kr-hash-key'] == "password") {
-        $key = PASSWORD;
-    } else {
-        return false; 
-    }  
-
-    $krAnswer = str_replace('\/', '/',  $_POST["kr-answer"]);
-    $calculateHash = hash_hmac("sha256", $krAnswer, $key);
-
-    return ($calculateHash == $_POST["kr-hash"]) ;
-}
+Para la validación de firma, es necesario llamar al servidor nuevamente y cambiar la dirección en el archivo `js/resultadoCompra.js`. Esto valida los datos recibidos por el servidor y te devolverá un booleano "true" si los datos son correctos, o "false" si los datos son incorrectos.
+```node
+ // Enviar una petición POST al servidor para validar la Firma
+  const respuesta = await fetch('http://localhost:3000/checkSignature', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Accept': 'application/json'
+  },
+    body: jsonString,
+  });
 ```
 
 Se valida que la firma recibida es correcta
 
-```php
-if (!checkHash()) {
-  throw new Exception("Invalid signature");
+```node
+  // Verificar si la respuesta del servidor es exitosa
+  if (!respuesta.ok) {
+    throw new Error(`Error en la solicitud: ${respuesta.statusText}`);
+  }
+```
+En caso que la validación sea exitosa, se puede extraer los datos de a través de un JSON y mostrar los datos del pago realizado.
+```node
+ const datosRespuesta = await respuesta.json();
+  //Si es exitosa, imprimimos la firma
+  if(datosRespuesta == true) { 
+    const preElement = document.getElementById('pre_kash');
+    preElement.textContent = jsonString; 
+  }
+
+} catch (error) {
+  console.error('Error al validar la firma:', error);
+  console.error('JSON enviado:', JSON.stringify(datosAEnviar, null, 2)); // Imprimir JSON en caso de error
 }
 ```
-En caso que la validación sea exitosa, se puede extraer los datos de `kr-answer` a través de un JSON y mostrar los datos del pago realizado.
 
-```php
-$answer = json_decode($_POST["kr-answer"], true);
-```
 ℹ️ Para más información: [Analizar resultado del pago](https://secure.micuentaweb.pe/doc/es-PE/rest/V4.0/kb/payment_done.html)
-
-### IPN
-La IPN es una notificación de servidor a servidor (servidor de Izipay hacia el servidor del comercio) que facilita información en tiempo real y de manera automática cuando se produce un evento, por ejemplo, al registrar una transacción.
-
-
-Se realiza la verificación de la firma utilizando la función `checkhash()` y se devuelve al servidor de izipay un mensaje confirmando el estado del pago.
-
-```php
-if (!checkHash()) {
-    throw new Exception("Invalid signature");
-}
-
-$answer = json_decode($_POST["kr-answer"], true);
-
-$transaction = $answer['transactions'][0];
-
-$orderStatus = $answer['orderStatus'];
-$orderId = $answer['orderDetails']['orderId'];
-$transactionUuid = $transaction['uuid'];
-
-print 'OK! OrderStatus is ' . $orderStatus;
-```
-
-La IPN debe ir configurada en el Backoffice Vendedor, en `Configuración -> Reglas de notificación -> URL de notificación al final del pago`
-
-<p align="center">
-  <img src="https://i.postimg.cc/zfx5JbQP/ipn.png" alt="Formulario" width=80%/>
-</p>
-
-ℹ️ Para más información: [Analizar IPN](https://secure.micuentaweb.pe/doc/es-PE/rest/V4.0/api/kb/ipn_usage.html)
 
 ### Transacción de prueba
 
-Antes de poner en marcha su pasarela de pago en un entorno de producción, es esencial realizar pruebas para garantizar su correcto funcionamiento.
+Antes de poner en marcha su pasarela de pago en un entorno de producción, es esencial realizar pruebas para garantizar su correcto funcionamiento. 
 
-Puede intentar realizar una transacción utilizando una tarjeta de prueba con la barra de herramientas de depuración (en la parte inferior de la página).
+Puede intentar realizar una transacción utilizando una tarjeta de prueba (en la parte inferior del formulario).
 
 <p align="center">
-  <img src="https://i.postimg.cc/3xXChGp2/tarjetas-prueba.png" alt="Formulario"/>
+  <img src="https://github.com/izipay-pe/Imagenes/blob/main/formulario_redireccion/Imagen-Formulario-Redireccion-testcard.png?raw=true" alt="Tarjetas de prueba" width="450"/>
 </p>
 
 - También puede encontrar tarjetas de prueba en el siguiente enlace. [Tarjetas de prueba](https://secure.micuentaweb.pe/doc/es-PE/rest/V4.0/api/kb/test_cards.html)
 
 ## 📡4.3.Pase a producción
 
-Reemplace **[CHANGE_ME]** con sus credenciales de PRODUCCIÓN de `API REST` extraídas desde el Back Office Vendedor, revisar [Requisitos Previos](https://github.com/izipay-pe/Readme-Template/tree/main?tab=readme-ov-file#-2-requisitos-previos).
-
-- Editar en `keys.example.php` en la ruta raiz del proyecto:
-```php
-// Identificador de su tienda
-define("USERNAME", "~ CHANGE_ME_USER_ID ~");
-
-// Clave de Test o Producción
-define("PASSWORD", "~ CHANGE_ME_PASSWORD ~");
-
-// Clave Pública de Test o Producción
-define("PUBLIC_KEY","~ CHANGE_ME_PUBLIC_KEY ~");
-
-// Clave HMAC-SHA-256 de Test o Producción
-define("HMAC_SHA256","~ CHANGE_ME_HMAC_SHA_256 ~");
-```
+Para el pase a producción es necesario cambiar las credenciales de TEST por las de PRODUCCIÓN dentro del servidor utilizado. El identificador de tienda sigue siendo el mismo.
 
 ## 🎨 5. Personalización
 
-Si deseas aplicar cambios específicos en la apariencia de la pasarela de pago, puedes lograrlo mediante la modificación de código CSS. En este enlace [Código CSS - Incrustado](https://github.com/izipay-pe/Personalizacion/blob/main/Formulario%20Incrustado/Style-Personalization-Incrustado.css) podrá encontrar nuestro script para un formulario incrustado.
+Si deseas aplicar cambios específicos en la apariencia de la página de pago, puedes lograrlo mediante las opciones de personalización en el Backoffice. En este enlace [Personalización - Página de pago](https://youtu.be/hy877zTjpS0?si=TgSeoqw7qiaQDV25) podrá encontrar un video para guiarlo en la personalización.
 
 <p align="center">
-  <img src="https://i.postimg.cc/zDddmKpH/persona.png" alt="Formulario"/>
+  <img src="https://github.com/izipay-pe/Imagenes/blob/main/formulario_redireccion/Personalizacion-formulario-redireccion.png?raw=true" alt="Personalizacion de formulario en redireccion"  width="750" />
 </p>
 
-## 📚 6. Consideraciones
+
+## 🛠 6. Servidores
+Lista de servidores disponibles:
+
+| Lenguaje | Proyecto                                                                 |
+|---------------------|--------------------------------------------------------------------------|
+| ![PHP](https://img.shields.io/badge/PHP-777BB4?style=flat&logo=php&logoColor=white)          | [Server-Redirect-PHP](enlace_a_proyecto_php)                                           |
+| ![Laravel](https://img.shields.io/badge/Laravel-FF2D20?style=flat&logo=laravel&logoColor=white) | [Server-Redirect-Laravel](enlace_a_proyecto_laravel)                                   |
+| ![Django](https://img.shields.io/badge/Django-092E20?style=flat&logo=django&logoColor=white)  | [Server-Redirect-Django](enlace_a_proyecto_django)                                     |
+| ![Flask](https://img.shields.io/badge/Flask-000000?style=flat&logo=flask&logoColor=white)    | [Server-Redirect-Flask](enlace_a_proyecto_flask)                                       |
+| ![.NET](https://img.shields.io/badge/.NET-5C2D91?style=flat&logo=dotnet&logoColor=white)      | [Server-Redirect-.NET](enlace_a_proyecto_dotnet)                                       |
+| ![NodeJS](https://img.shields.io/badge/Node.js-339933?style=flat&logo=nodedotjs&logoColor=white) | [Server-Redirect-NodeJS](enlace_a_proyecto_nodejs)                                     |
+| ![NextJS](https://img.shields.io/badge/Next.js-000000?style=flat&logo=nextdotjs&logoColor=white) | [Server-Redirect-NextJS](enlace_a_proyecto_nextjs)                                     |
+| ![Java](https://img.shields.io/badge/Servlet%20Java-007396?style=flat&logo=java&logoColor=white) | [Server-Redirect-Servelt-Java](enlace_a_proyecto_servlet_java)                         |
+| ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-6DB33F?style=flat&logo=springboot&logoColor=white) | [Server-Redirect-Springboot-Java](enlace_a_proyecto_spring_boot)                         |
+
+
+## 📚 7. Consideraciones
 
 Para obtener más información, echa un vistazo a:
 
-- [Formulario incrustado: prueba rápida](https://secure.micuentaweb.pe/doc/es-PE/rest/V4.0/javascript/quick_start_js.html)
+- [Integración Formulario redirección](https://secure.micuentaweb.pe/doc/es-PE/form-payment/standard-payment/sitemap.html)
 - [Primeros pasos: pago simple](https://secure.micuentaweb.pe/doc/es-PE/rest/V4.0/javascript/guide/start.html)
 - [Servicios web - referencia de la API REST](https://secure.micuentaweb.pe/doc/es-PE/rest/V4.0/api/reference.html)

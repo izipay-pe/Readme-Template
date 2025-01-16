@@ -15,7 +15,7 @@
 💳 [4.2. Analizar resultado de pago](https://github.com/izipay-pe/Readme-Template/tree/main?tab=readme-ov-file#42-analizar-resultado-del-pago)  
 📡 [4.3. Pase a producción](https://github.com/izipay-pe/Readme-Template/tree/main?tab=readme-ov-file#43pase-a-producci%C3%B3n)  
 🎨 [5. Personalización](https://github.com/izipay-pe/Readme-Template/tree/main?tab=readme-ov-file#-5-personalizaci%C3%B3n)  
-🛠️ [6. Sevidores](https://github.com/izipay-pe/Readme-Template/blob/main/README.md#-6-servidores)    
+🛠️ [6. Servidores](https://github.com/izipay-pe/Readme-Template/blob/main/README.md#-6-servidores)    
 📚 [7. Consideraciones](https://github.com/izipay-pe/Readme-Template/tree/main?tab=readme-ov-file#-6-consideraciones)
 
 ## ➡️ 1. Introducción
